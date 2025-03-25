@@ -5,16 +5,15 @@ public class Book {
     private Author author;
     private String name;
     private int price;
-    private String status;
     private int edition;
     private String dateOfPurchase;
 
-    public Book(long bookId, Author author, String name, int price, String status, int edition, String dateOfPurchase) {
+    public Book(long bookId, Author author, String name, int price, int edition, String dateOfPurchase) {
         this.bookId = bookId;
         this.author = author;
         this.name = name;
         this.price = price;
-        this.status = status;
+
         this.edition = edition;
         this.dateOfPurchase = dateOfPurchase;
     }
@@ -29,9 +28,6 @@ public class Book {
     }
     public int getPrice() {
         return price;
-    }
-    public String getStatus() {
-        return status;
     }
     public int getEdition() {
         return edition;

@@ -1,14 +1,16 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Reader extends Person {
-    private List<Book> books;
+    private Map<Integer, Book> books;
 
     public Reader(String name) {
         super(name);
-        this.books = new ArrayList<>();
+        this.books = new HashMap();
     }
 
     @Override
@@ -16,7 +18,7 @@ public class Reader extends Person {
         return "I am Reader, My name is " + getName();
     }
 
-    public List<Book> getBooks() {
+    public Map<Integer, Book> getBooks() {
         return books;
     }
 }

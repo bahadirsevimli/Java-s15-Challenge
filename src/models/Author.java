@@ -21,4 +21,7 @@ public class Author extends Person {
     public List<Book> getBooks() {
         return books;
     }
+    public void addBook(Book book) {
+        this.books.add(book);
+    }
 }
