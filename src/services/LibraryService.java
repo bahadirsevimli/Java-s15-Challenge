@@ -5,6 +5,7 @@ import models.Book;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class LibraryService {
     private List<Book> books;
@@ -23,9 +24,18 @@ public class LibraryService {
         return books;
     }
 
-    public void deleteBook(Book book) {
-        books.remove(book);
-        System.out.println("Book deleted successfully: " + book.getTitle());
+    public void deleteBook(String deleteBookName) {
+        Book bookToDelete = findBookByTitle(deleteBookName);
+
+        if (bookToDelete == null) {
+            System.out.println("Book not found");
+            return;
+        }
+
+        books.remove(bookToDelete);
+        bookToDelete.getAuthor().getBooks().remove(bookToDelete);
+
+        System.out.println("Book deleted successfully: " + deleteBookName);
     }
 
     public Book findBookById(long bookId){
@@ -47,21 +57,63 @@ public class LibraryService {
     }
 
     public Author createAuthor(String authorName) {
-       Author author = new Author(authorName);
-       return author;
-    }
-
-    public Book findBookByAuthor(String authorName) {
-        for (Book book : books) {
+        for(Book book : books){
             if(book.getAuthor().getName().equals(authorName)){
-              for(Book authorBook : book.getAuthor().getBooks())  {
-                  System.out.println(authorBook.getTitle());
-              }
-            }else{
-                System.out.println(authorName + " not found");
+                return book.getAuthor();
             }
         }
-        return null;
+       return new Author(authorName);
+    }
+
+    public List<Book> findBookByAuthor(String authorName) {
+
+        for (Book book : books) {
+            if(book.getAuthor().getName().equals(authorName)){
+              return book.getAuthor().getBooks();
+            }
+        }
+        return new ArrayList<>();
+    }
+
+    public void writeBooks(List<Book> books) {
+        for(Book book : books){
+            System.out.println(book.getTitle());
+        }
+    }
+
+    public void updateBook(long bookId, Scanner scanner) {
+        Book bookToUpdate = findBookById(bookId);
+
+        if(bookToUpdate == null){
+            System.out.println("No book with this ID found in the library: " + bookId);
+            return;
+        }
+        System.out.println("Updating book: " + bookToUpdate.getTitle());
+
+        System.out.println("New title (leave empty to keep current): ");
+        String newTitle = scanner.nextLine();
+        if(!newTitle.isEmpty()) {
+            bookToUpdate.setTitle(newTitle);
+        }
+
+        System.out.println("New Price (leave empty to keep current): ");
+        String newPrice = scanner.nextLine();
+        if(!newPrice.isEmpty()) {
+            bookToUpdate.setPrice(Integer.parseInt(newPrice));
+        }
+
+        System.out.println("New Edition (leave empty to keep current): ");
+        String newEdition = scanner.nextLine();
+        if(!newEdition.isEmpty()) {
+            bookToUpdate.setEdition(Integer.parseInt(newEdition));
+        }
+
+        System.out.println("New date of purchase (leave empty to keep current): ");
+        String newDate = scanner.nextLine();
+        if(!newDate.isEmpty()) {
+            bookToUpdate.setDateOfPurchase(newDate);
+        }
+        System.out.println("Book updated successfully: " + bookToUpdate.getTitle());
     }
 
 }

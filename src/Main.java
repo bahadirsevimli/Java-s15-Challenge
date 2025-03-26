@@ -3,6 +3,7 @@ import models.Book;
 import models.Person;
 import services.LibraryService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -17,7 +18,7 @@ public class Main {
             scanner.nextLine();
             if (option == 1) {
                 while (true){
-                    System.out.println("\n1- Add new book\n2- List the books\n3- Back to the main menu");
+                    System.out.println("\n1- Add new book\n2- List the books \n3- Delete book \n4- Update book \n5- Back to the main menu");
                     System.out.print("Your choice: ");
                     int choice = scanner.nextInt();
                     scanner.nextLine();
@@ -49,7 +50,16 @@ public class Main {
                         for (Book book : library.getBooks()) {
                             System.out.println(book.getTitle() + " - " + book.getAuthor().getName());
                         }
-                    } else if (choice == 3) {
+                    }else if (choice == 3) {
+                        System.out.println("the name of the book you want to delete: ");
+                        String deleteName = scanner.nextLine();
+                       library.deleteBook(deleteName);
+                    } else if (choice == 4) {
+                        System.out.println("the ID of the book you want to update: ");
+                        long id = Long.parseLong(scanner.nextLine());
+                        library.updateBook(id, scanner);
+
+                    } else if (choice == 5) {
                         break;
                     }
                 }
@@ -82,7 +92,12 @@ public class Main {
                     }else if(choice == 3){
                         System.out.println("Author Name: ");
                         String authorName = scanner.nextLine();
-                        library.findBookByAuthor(authorName);
+                        List<Book> foundBooks = library.findBookByAuthor(authorName);
+                        if(foundBooks.isEmpty()){
+                            System.out.println("Book not found");
+                        }else{
+                            library.writeBooks(foundBooks);
+                        }
                     }
                     else if (choice == 5) {
                         break;
@@ -92,6 +107,7 @@ public class Main {
 
             }  else if (option == 3) {
                 System.out.println("Exiting...");
+                System.out.println("Thank you for using Library System");
                 break;
             }
 

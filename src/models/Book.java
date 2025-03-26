@@ -36,4 +36,24 @@ public class Book {
         return dateOfPurchase;
     }
 
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
+    }
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+    public void setTitle(String title) {
+        this.name = title;
+    }
+    public void setPrice(int price) {
+        this.price = price;
+    }
+    public void setEdition(int edition) {
+        this.edition = edition;
+    }
+    public void setDateOfPurchase(String dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
+    }
+
+
 }
