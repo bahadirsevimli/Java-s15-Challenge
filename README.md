@@ -15,7 +15,7 @@ You can choose a role.
 * You can view the books you have borrowed.
 
 <p align="center">
-  <img src="images/umlDiagram" alt="UML Diyagramı" width="500"/>
+  <img src="images/uml-diagram.png" alt="UML Diyagramı" width="500"/>
 </p>
 
  
