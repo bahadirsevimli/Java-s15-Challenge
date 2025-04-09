@@ -14,10 +14,39 @@ public class LibraryService {
         this.books = new ArrayList<>();
     }
 
-    public void addNewBook(Book book) {
-        books.add(book);
-        book.getAuthor().addBook(book);
-        System.out.println("Book added successfully: " + book.getTitle());
+    public void newBook(Scanner scanner) {
+
+        System.out.print("Book ID: ");
+        long id = Long.parseLong(scanner.nextLine());
+
+        if(findBookById(id) == null){
+
+            System.out.print("Author: ");
+            String authorName = scanner.nextLine();
+            Author author = createAuthor(authorName);
+
+            System.out.print("Book name: ");
+            String title = scanner.nextLine();
+
+            System.out.print("price: ");
+            int price = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("Edition: ");
+            int edition = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("Date of purchase: ");
+            String dateOfPurchase = scanner.nextLine();
+
+            Book newBook = new Book(id, author, title, price, edition, dateOfPurchase);
+            books.add(newBook);
+            newBook.getAuthor().addBook(newBook);
+            System.out.println("Book added successfully: " + newBook.getTitle());
+
+            return;
+        }
+        System.out.println("There is already a book for the id you entered!");
+
+
     }
 
     public List<Book> getBooks() {

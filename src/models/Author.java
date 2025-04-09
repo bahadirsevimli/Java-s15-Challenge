@@ -13,11 +13,6 @@ public class Author extends Person {
         this.books = new ArrayList<>();
     }
 
-    @Override
-    public String whoYouAre() {
-        return "I am author, My name is " + getName();
-    }
-
     public List<Book> getBooks() {
         return books;
     }
