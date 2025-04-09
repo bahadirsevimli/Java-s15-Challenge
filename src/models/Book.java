@@ -13,7 +13,6 @@ public class Book {
         this.author = author;
         this.name = name;
         this.price = price;
-
         this.edition = edition;
         this.dateOfPurchase = dateOfPurchase;
     }
